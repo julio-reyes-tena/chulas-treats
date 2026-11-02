@@ -1,9 +1,12 @@
 import { products, formatPrice } from "@/data/products";
-
+import ProductOptions from "@/components/ProductOptions";
+import { CartProvider } from "@/components/CartProvider";
+import Cart from "@/components/Cart";
 
 export default function Home() {
   return (
-    <main className="min-h-screen bg-pink-50 text-stone-900">
+      <CartProvider>
+      <main className="min-h-screen bg-pink-50 text-stone-900">
       <header className="border-b border-pink-100 bg-white">
         <nav
           aria-label="Main navigation"
@@ -86,10 +89,16 @@ export default function Home() {
                   {product.quantity}
                 </span>
               </p>
+            <ProductOptions
+  productId={product.id}
+  flavors={product.flavors}
+  priceInCents={product.priceInCents}
+/>
             </article>
           ))}
         </div>
       </section>
+<Cart />
 
       <section id="pickup" className="scroll-mt-6 bg-white px-6 py-16">
         <div className="mx-auto max-w-6xl">
@@ -147,5 +156,7 @@ export default function Home() {
         Chula&apos;s Treats · Made with love
       </footer>
     </main>
+        </CartProvider>
+
   );
 }
