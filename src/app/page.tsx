@@ -2,6 +2,7 @@ import { products, formatPrice } from "@/data/products";
 import ProductOptions from "@/components/ProductOptions";
 import { CartProvider } from "@/components/CartProvider";
 import Cart from "@/components/Cart";
+import PickupPicker from "@/components/PickupPicker";
 
 export default function Home() {
   return (
@@ -99,6 +100,7 @@ export default function Home() {
         </div>
       </section>
 <Cart />
+<PickupPicker />
 
       <section id="pickup" className="scroll-mt-6 bg-white px-6 py-16">
         <div className="mx-auto max-w-6xl">

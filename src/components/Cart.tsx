@@ -4,7 +4,7 @@ import { products, formatPrice } from "@/data/products";
 import { useCart } from "./CartProvider";
 
 export default function Cart() {
-  const { items, removeItem } = useCart();
+const { items, removeItem, pickupSlot } = useCart();
 
   const cartItems = items.flatMap((item) => {
     const product = products.find(
@@ -79,10 +79,33 @@ export default function Cart() {
                 <span>{formatPrice(subtotal)}</span>
               </p>
 
-              <p className="mt-3 text-sm text-stone-600">
-                Pickup scheduling and checkout are coming next.
-                Orders cannot be submitted yet.
-              </p>
+  <div className="mt-4 rounded-xl bg-pink-50 p-4">
+  <p className="font-semibold">Pickup</p>
+
+  <p className="mt-1 text-sm text-stone-700">
+    {pickupSlot
+      ? new Intl.DateTimeFormat("en-US", {
+          timeZone: "America/Los_Angeles",
+          weekday: "long",
+          month: "short",
+          day: "numeric",
+          hour: "numeric",
+          minute: "2-digit",
+          timeZoneName: "short",
+        }).format(new Date(pickupSlot))
+      : "Choose a pickup time below before checkout."}
+  </p>
+
+  {pickupSlot && (
+    <p className="mt-1 text-sm text-stone-600">
+      Your pickup window lasts 30 minutes.
+    </p>
+  )}
+</div>
+
+<p className="mt-3 text-sm text-stone-600">
+  Checkout is not connected yet. Your pickup time is not reserved.
+</p>
             </div>
           </>
         )}

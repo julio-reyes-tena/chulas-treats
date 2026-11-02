@@ -13,12 +13,15 @@ type CartContextValue = {
   items: CartItem[];
   addItem: (item: CartItem) => void;
   removeItem: (productId: string, flavor: string) => void;
+  pickupSlot: string;
+setPickupSlot: (slot: string) => void;
 };
 
 const CartContext = createContext<CartContextValue | null>(null);
 
 export function CartProvider({ children }: { children: ReactNode }) {
   const [items, setItems] = useState<CartItem[]>([]);
+  const [pickupSlot, setPickupSlot] = useState("");
 
   function addItem(newItem: CartItem) {
     setItems((current) => {
@@ -48,7 +51,7 @@ export function CartProvider({ children }: { children: ReactNode }) {
   }
 
   return (
-    <CartContext.Provider value={{ items, addItem, removeItem }}>
+    <CartContext.Provider value={{ items, addItem, removeItem, pickupSlot, setPickupSlot }}>
       {children}
     </CartContext.Provider>
   );
